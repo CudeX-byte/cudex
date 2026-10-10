@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CUDEX — Investment Terminal</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2338d996'/%3E%3Ctext x='32' y='46' font-size='38' font-weight='900' text-anchor='middle' fill='%2307130f' font-family='Arial'%3EC%3C/text%3E%3C/svg%3E" />
+<meta name="description" content="CUDEX — Bitcoin, altın ve döviz takip terminali" />
+<meta name="theme-color" content="#0a0f18" />
+<script>document.documentElement.dataset.theme=localStorage.getItem("cudex_theme")||"dark"</script>
+<style>
+:root{--bg:#080d15;--panel:#101824;--panel2:#0d1420;--line:#202d3d;--text:#eef4fb;--muted:#91a0b5;--green:#38d996;--red:#ff6b78;--gold:#f5c451;--blue:#6da8ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#142238 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}.shell{max-width:1500px;margin:auto;padding:22px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,#8af0c4,#28a978);color:#07130f;font-weight:900;display:grid;place-items:center;font-size:18px;box-shadow:0 8px 30px #25b67b30}.brand h1{font-size:22px;letter-spacing:2px;margin:0}.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.6px}.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pill,.btn{border:1px solid var(--line);background:#111b28;color:var(--text);padding:9px 12px;border-radius:10px}.live-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:7px;box-shadow:0 0 12px #38d99688}.layout{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(310px,1fr);gap:18px}.market-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.card{background:linear-gradient(145deg,#111b29,#0d1420);border:1px solid var(--line);border-radius:16px;padding:17px;min-width:0;box-shadow:0 10px 28px #00000012}.asset-top{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px}.coin{width:29px;height:29px;display:grid;place-items:center;border-radius:9px;background:#1c2a3b;color:var(--gold);font-weight:800}.asset-price{font-size:clamp(17px,2vw,24px);font-weight:750;letter-spacing:-.7px;margin:15px 0 5px;white-space:nowrap}.asset-change{font-size:12px;color:var(--muted)}.up{color:var(--green)!important}.down{color:var(--red)!important}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 14px}.section-head h2{font-size:15px;margin:0;font-weight:700}.section-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.chart-card{padding:20px;margin-bottom:18px}.chart-toolbar{display:flex;gap:7px;flex-wrap:wrap}.chart-toolbar button{background:#111b28;border:1px solid var(--line);color:var(--muted);padding:7px 10px;border-radius:8px;font-size:12px}.chart-toolbar button.active{color:var(--text);border-color:#3c8f70;background:#163328}.chart-wrap{height:290px;position:relative;margin-top:16px}.chart-wrap canvas{width:100%;height:100%;display:block}.chart-note{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:9px}.ratio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.ratio-value{font-size:20px;font-weight:750;margin:11px 0 4px}.ratio-label{color:var(--muted);font-size:12px}.side-stack{display:grid;gap:18px;align-content:start}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.field{display:grid;gap:6px;margin-bottom:12px}.field label{font-size:12px;color:var(--muted)}.field input,.field select{width:100%;background:#0a111b;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;outline:none}.field input:focus,.field select:focus{border-color:#3f9d78}.primary{background:var(--green);color:#062015;border:0;border-radius:10px;padding:11px 14px;font-weight:800;width:100%}.secondary{background:#152337;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px}.balance{font-size:28px;font-weight:800;margin:8px 0 2px}.muted{color:var(--muted)}.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.mini-stat{padding:12px;border-radius:11px;background:#0b121d;border:1px solid #1c2939}.mini-stat span{display:block;color:var(--muted);font-size:11px}.mini-stat strong{display:block;font-size:16px;margin-top:5px}.portfolio-list{display:grid;gap:9px;margin-top:15px}.holding{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #1c2735}.holding:last-child{border-bottom:0}.holding strong{display:block}.holding small{color:var(--muted)}.history{width:100%;border-collapse:collapse;font-size:12px}.history th,.history td{text-align:left;padding:10px 7px;border-bottom:1px solid #1d2938;white-space:nowrap}.history th{color:var(--muted);font-weight:600}.history-wrap{overflow:auto}.empty{color:var(--muted);text-align:center;padding:20px 0}.footer{margin:22px 0 5px;color:#718096;font-size:11px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.status{font-size:11px;color:var(--muted)}.warning{background:#241e10;border:1px solid #51401d;color:#e8ce8b;border-radius:10px;padding:10px 12px;font-size:11px;margin-top:14px}.toast{position:fixed;bottom:20px;right:20px;background:#17283a;border:1px solid #36516d;padding:12px 16px;border-radius:12px;display:none;max-width:340px;z-index:5}
+@media(max-width:1050px){.market-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.layout{grid-template-columns:1fr}.side-stack{grid-template-columns:repeat(2,minmax(0,1fr))}.side-stack .wide{grid-column:1/-1}}
+@media(max-width:650px){.shell{padding:13px}.topbar{align-items:flex-start;flex-direction:column}.market-grid{gap:9px}.card{padding:14px}.asset-price{font-size:19px}.ratio-grid{grid-template-columns:1fr}.side-stack{grid-template-columns:1fr}.side-stack .wide{grid-column:auto}.chart-wrap{height:230px}.balance{font-size:24px}}
+[hidden]{display:none!important}.tabs{margin:-6px 0 20px}.tabs button{padding:10px 18px;font-size:13px}.chart-toolbar button:hover{color:var(--text)}.range-bar{margin-top:12px}.field textarea{width:100%;background:#0a111b;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px;outline:none;font:inherit;resize:vertical}
+@media(max-width:650px){.market-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chart-toolbar button{white-space:nowrap}.chart-card .section-head{flex-wrap:wrap}}
+.chart-wrap canvas{touch-action:pan-y;cursor:crosshair}
+.feed{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.post{padding:0;overflow:hidden}.post img{width:100%;height:160px;object-fit:cover;display:block}.pb{padding:14px}.post h3{margin:0 0 4px;font-size:15px}.post p{white-space:pre-wrap;color:var(--muted);margin:8px 0}.post a{color:var(--blue);text-decoration:none}.clamp{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}.clamp.open{display:block}.pv{width:100%;max-height:140px;object-fit:cover;border-radius:9px;margin-top:8px}
+[data-theme=light]{--bg:#f2f5f9;--panel:#fff;--panel2:#f6f8fb;--line:#d8e0ea;--text:#13212f;--muted:#586779;--green:#119a67;--red:#d93a50;--gold:#b0800a;--blue:#2b68c9}
+[data-theme=light] body{background:radial-gradient(ellipse at 15% 0%,#dbe7f5 0,transparent 40%),var(--bg)}
+[data-theme=light] .card{background:#fff;box-shadow:0 6px 22px #1b2f4a14}
+[data-theme=light] .pill,[data-theme=light] .btn,[data-theme=light] .chart-toolbar button,[data-theme=light] .secondary{background:#fff;color:var(--text)}
+[data-theme=light] .chart-toolbar button{color:var(--muted)}
+[data-theme=light] .chart-toolbar button.active{background:#dff4ea;border-color:#37b384;color:#0a4a32}
+[data-theme=light] .field input,[data-theme=light] .field select,[data-theme=light] .field textarea{background:#f6f8fb;color:var(--text)}
+[data-theme=light] .mini-stat{background:#f4f7fb;border-color:#e0e7ef}
+[data-theme=light] .holding,[data-theme=light] .history th,[data-theme=light] .history td{border-bottom-color:#e5ebf2}
+[data-theme=light] .warning{background:#fff6dc;border-color:#ebd38a;color:#76590a}
+[data-theme=light] .toast{background:#fff;border-color:#c5d1df;color:var(--text)}
+[data-theme=light] .coin{background:#e9eff6}
+[data-theme=light] .primary{color:#fff}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="brand"><div class="logo">C</div><div><h1>CUDEX</h1><small>INVESTMENT TERMINAL</small></div></div>
+    <div class="top-actions"><div class="pill"><span class="live-dot"></span><span id="connection">Piyasa bağlantısı başlatılıyor</span></div><div class="pill" id="clock">--:--:--</div><button class="btn" id="themeBtn">☀ Gündüz</button><button class="coin" id="topAvatar" title="Profil" style="border:0;cursor:pointer;width:38px;height:38px">C</button><button class="btn" id="refreshBtn">↻ Yenile</button></div>
+  </header>
+  <nav class="chart-toolbar tabs"><button class="active" data-tab="market">Piyasa</button><button data-tab="wallet">Cüzdan</button><button data-tab="news">Haber Akışı</button><button data-tab="info">Bilgilendirme</button><button data-tab="profile">Profil &amp; Bağlantılar</button></nav>
+  <div id="v-market">
+
+  <section class="market-grid">
+    <article class="card"><div class="asset-top"><div class="coin">₿</div><span>BITCOIN / USD</span></div><div class="asset-price" id="btcUsd">Bağlanıyor…</div><div class="asset-change" id="btcChange">Canlı veri bekleniyor</div></article>
+    <article class="card"><div class="asset-top"><div class="coin">₿</div><span>BITCOIN / TRY</span></div><div class="asset-price" id="btcTry">—</div><div class="asset-change" id="btcTrySub">BTC/USD × USD/TRY</div></article>
+    <article class="card"><div class="asset-top"><div class="coin">Au</div><span>ONS ALTIN / USD</span></div><div class="asset-price" id="goldUsd">—</div><div class="asset-change" id="goldSub">Kaynak bağlanıyor</div></article>
+    <article class="card"><div class="asset-top"><div class="coin">$</div><span>DOLAR / TL</span></div><div class="asset-price" id="usdTry">—</div><div class="asset-change" id="fxSub">Kaynak bağlanıyor</div></article>
+    <article class="card"><div class="asset-top"><div class="coin">₿</div><span>BTC / GRAM ALTIN</span></div><div class="asset-price" id="btcGramCard">—</div><div class="asset-change" id="btcGramSub">1 BTC = kaç gram altın</div></article>
+    <article class="card"><div class="asset-top"><div class="coin">g</div><span>GRAM ALTIN / TRY</span></div><div class="asset-price" id="gramTryCard">—</div><div class="asset-change" id="gramTrySub">Teorik 24 ayar gram fiyatı</div></article>
+  </section>
+
+  <div class="layout">
+    <main>
+      <section class="card chart-card">
+        <div class="section-head"><div><h2 id="chartTitle">Bitcoin / USD</h2><p id="chartSubtitle">Canlı piyasa takibi</p></div><div class="chart-toolbar"><button class="active" data-chart="BTCUSD">BTC/USD</button><button data-chart="BTCGRAM">BTC/GRAM ALTIN</button><button data-chart="BTCGOLD">BTC/ONS</button><button data-chart="GOLD">ONS ALTIN</button><button data-chart="GRAMTRY">GRAM ALTIN/TRY</button></div></div>
+        <div class="chart-toolbar range-bar"><button data-range="LIVE">Canlı</button><button data-range="M1">Dakikalık</button><button data-range="H1">Saatlik</button><button data-range="D1" class="active">Günlük</button><button data-range="W1">Haftalık</button><button data-range="M">Aylık</button><button data-range="M3">3 Aylık</button><button data-range="M6">6 Aylık</button><button data-range="Y1">Yıllık</button></div>
+        <div class="chart-wrap"><canvas id="priceChart"></canvas></div>
+        <div class="chart-note"><span id="chartSource">Fiyat verisi hazırlanıyor</span><span id="rangeNote"></span></div>
+      </section>
+
+      <section class="card" style="margin-bottom:18px">
+        <div class="section-head"><div><h2>Çapraz Piyasa Göstergeleri</h2><p>Fiyatlardan otomatik hesaplanan oranlar</p></div></div>
+        <div class="ratio-grid">
+          <div class="mini-stat"><span>1 BTC kaç ons altın?</span><div class="ratio-value" id="btcGold">—</div><div class="ratio-label">BTC ÷ XAU/USD</div></div>
+          <div class="mini-stat"><span>1 ons altın kaç TL?</span><div class="ratio-value" id="goldTry">—</div><div class="ratio-label">XAU/USD × USD/TRY</div></div>
+          <div class="mini-stat"><span>1 gram altın teorik TL</span><div class="ratio-value" id="gramGold">—</div><div class="ratio-label">Ons fiyatı ÷ 31,1035 × kur</div></div>
+          <div class="mini-stat"><span>BTC / Altın gramı</span><div class="ratio-value" id="btcGram">—</div><div class="ratio-label">1 BTC'nin gram altın karşılığı</div></div>
+          <div class="mini-stat"><span>Altın / USD</span><div class="ratio-value" id="goldPerUsd">—</div><div class="ratio-label">1 USD kaç ons altın eder?</div></div>
+          <div class="mini-stat"><span>Veri güncelliği</span><div class="ratio-value" style="font-size:16px" id="lastUpdate">Bekleniyor</div><div class="ratio-label">Son başarılı veri zamanı</div></div>
+        </div>
+        <div class="warning">Bilgilendirme: Bu bir simülasyondur, yatırım tavsiyesi değildir. Kripto fiyatı borsa verisidir; altın ve döviz verileri sağlayıcıya göre gecikmeli olabilir. Teorik gram altın hesabı kuyumcu makası, işçilik ve vergileri içermez.</div>
+      </section>
+
+      <section class="card">
+        <div class="section-head"><div><h2>İşlem Geçmişi</h2><p>Son sanal alım-satım işlemlerin</p></div><button class="secondary" id="clearHistory">Geçmişi temizle</button></div>
+        <div class="history-wrap"><table class="history"><thead><tr><th>Tarih</th><th>İşlem</th><th>Varlık</th><th>Miktar</th><th>Fiyat</th><th>Tutar</th></tr></thead><tbody id="historyBody"><tr><td colspan="6" class="empty">Henüz işlem yapılmadı.</td></tr></tbody></table></div>
+      </section>
+    </main>
+
+    <aside class="side-stack">
+      <section class="card">
+        <div class="section-head"><div><h2>Sanal Portföy</h2><p>Gerçek para kullanılmaz</p></div><span class="pill">DEMO</span></div>
+        <div class="muted">Toplam portföy değeri</div><div class="balance" id="portfolioValue">₺100.000,00</div><div class="muted" id="portfolioPnl">Başlangıç bakiyesi</div>
+        <div class="mini-stats"><div class="mini-stat"><span>Nakit (TRY)</span><strong id="cashValue">₺100.000,00</strong></div><div class="mini-stat"><span>Toplam getiri</span><strong id="returnValue">%0,00</strong></div></div>
+        <div class="portfolio-list" id="holdings"></div>
+        <button class="secondary" style="width:100%;margin-top:12px" id="resetPortfolio">Portföyü sıfırla</button>
+      </section>
+
+      <section class="card">
+        <div class="section-head"><div><h2>Sanal İşlem</h2><p>Alım-satım simülasyonu</p></div></div>
+        <div class="field"><label for="tradeAsset">Varlık</label><select id="tradeAsset"><option value="BTC">Bitcoin (BTC)</option><option value="GOLD">Altın (gram)</option></select></div>
+        <div class="field"><label for="tradeSide">İşlem yönü</label><select id="tradeSide"><option value="BUY">Alış</option><option value="SELL">Satış</option></select></div>
+        <div class="field"><label for="tradeMode">Giriş türü</label><select id="tradeMode"><option value="AMOUNT">TL tutarı ile</option><option value="QTY">Miktar ile (BTC / gram)</option></select></div>
+        <div class="field"><label for="tradeAmount" id="tradeLabel">Tutar (TL)</label><input id="tradeAmount" type="number" min="1" step="1" value="1000" /></div>
+        <div class="field"><label for="feeRate">Komisyon (%)</label><input id="feeRate" type="number" min="0" max="10" step="0.01" value="0.10" /></div>
+        <div class="muted" id="tradeQuote" style="font-size:12px;margin:-2px 0 12px">Güncel fiyat bekleniyor</div>
+        <button class="primary" id="executeTrade">Sanal işlemi gerçekleştir</button>
+      </section>
+
+      <section class="card wide">
+        <div class="section-head"><div><h2>Fiyat Alarmı</h2><p>Tarayıcı açıkken fiyat seviyelerini takip et</p></div></div>
+        <div class="form-row"><div class="field"><label for="alertAsset">Varlık</label><select id="alertAsset"><option value="BTCUSD">BTC/USD</option><option value="BTCGOLD">BTC/Altın</option><option value="BTCGRAM">BTC/Gram altın</option><option value="GOLD">Ons altın</option><option value="GRAMTRY">GRAM ALTIN/TRY</option><option value="USDTRY">USD/TRY</option></select></div><div class="field"><label for="alertDirection">Koşul</label><select id="alertDirection"><option value="above">Üzerine çıkarsa</option><option value="below">Altına düşerse</option></select></div></div>
+        <div class="field"><label for="alertValue">Hedef değer</label><input id="alertValue" type="number" min="0" step="any" placeholder="Örn. 100000" /></div>
+        <button class="secondary" style="width:100%" id="addAlert">Alarm ekle</button><div id="alertList" class="portfolio-list"></div>
+      </section>
+    </aside>
+  </div>
+  </div>
+
+  <section id="v-wallet" hidden><div class="layout"><main>
+    <section class="card" style="margin-bottom:18px"><div class="section-head"><div><h2>Cüzdanım</h2><p>Elindeki varlıkların güncel TL değeri</p></div></div>
+      <div class="muted">Toplam değer</div><div class="balance" id="wTotal">—</div><div id="wPnl" class="muted"></div></section>
+    <section class="card chart-card"><div class="section-head"><div><h2>Cüzdan Grafiği</h2><p>Toplam değerin seyri · ▲ giriş  ▼ çıkış</p></div></div><div class="chart-wrap"><canvas id="walletChart"></canvas></div><div class="chart-note"><span>Değerler sayfa açıkken kaydedilir</span><span></span></div></section>
+    <section class="card"><div class="history-wrap"><table class="history"><thead><tr><th>Varlık</th><th>Miktar</th><th>Alış (birim)</th><th>Güncel (birim)</th><th>Değer</th><th>K/Z</th><th></th></tr></thead><tbody id="walletBody"></tbody></table></div></section>
+    <section class="card" style="margin-top:18px"><div class="section-head"><div><h2>Para Giriş / Çıkışları</h2><p id="flowSum"></p></div></div><div class="history-wrap"><table class="history"><thead><tr><th>Tarih</th><th>Hareket</th><th>Açıklama</th><th>Tutar (TL)</th></tr></thead><tbody id="flowBody"></tbody></table></div></section>
+  </main><aside class="side-stack"><section class="card wide">
+    <div class="section-head"><div><h2>Varlık Ekle</h2><p>Elindeki ürünü cüzdana kaydet</p></div></div>
+    <div class="field"><label for="wType">Varlık</label><select id="wType"><option value="GRAM">Gram altın (24 ayar)</option><option value="CEYREK">Çeyrek altın</option><option value="BTC">Bitcoin (BTC)</option><option value="USD">Dolar (USD)</option><option value="EUR">Euro (EUR)</option><option value="TRY">Türk Lirası (nakit)</option><option value="CUSTOM">Özel varlık…</option></select></div>
+    <div id="custF" hidden><div class="field"><label for="wName">Varlık adı</label><input id="wName" placeholder="Örn. Hisse, araç, fon" /></div><div class="field"><label for="wPrice">Güncel birim fiyat (TL)</label><input id="wPrice" type="number" min="0" step="any" /></div></div>
+    <div class="field"><label for="wQty">Miktar</label><input id="wQty" type="number" min="0" step="any" /></div>
+    <div class="field"><label for="wCost">Alış fiyatı - birim başı TL (isteğe bağlı)</label><input id="wCost" type="number" min="0" step="any" /></div>
+    <button class="primary" id="wAdd">Cüzdana ekle</button>
+    <div class="warning">Çeyrek altın değeri teoriktir (1,6035 g saf altın). Özel varlıkların fiyatını sen girersin; güncellemek için silip yeniden ekle.</div>
+  </section></aside></div></section>
+
+  <section id="v-profile" hidden><div class="layout"><main>
+    <section class="card" style="margin-bottom:18px"><div class="section-head"><div><h2>Profil</h2><p>Bilgiler yalnızca bu tarayıcıda saklanır</p></div><div class="coin" id="avatar" style="width:64px;height:64px;font-size:24px">C</div></div>
+      <div class="field"><label>Profil fotoğrafı</label><div style="display:flex;gap:8px"><label class="secondary" style="cursor:pointer">Fotoğraf seç<input type="file" id="pPhoto" accept="image/*" hidden></label><button class="secondary" id="pPhotoDel">Kaldır</button></div></div>
+      <div class="form-row"><div class="field"><label for="pName">Ad Soyad</label><input id="pName" /></div><div class="field"><label for="pMail">E-posta</label><input id="pMail" type="email" /></div></div>
+      <div class="field"><label for="pNote">Notum / yatırım hedefim</label><textarea id="pNote" rows="3"></textarea></div>
+      <button class="primary" id="pSave">Profili kaydet</button></section>
+    <section class="card"><div class="section-head"><div><h2>Yedekleme</h2><p>Cüzdan, portföy, alarm ve profili dosyaya aktar</p></div></div>
+      <div class="form-row"><button class="secondary" id="expBtn">Dışa aktar (JSON)</button><label class="secondary" style="text-align:center;cursor:pointer">İçe aktar<input type="file" id="impFile" accept=".json" hidden></label></div></section>
+  </main><aside class="side-stack"><section class="card wide"><div class="section-head"><div><h2>Veri Bağlantıları</h2><p>Kaynakların anlık durumu</p></div></div><div class="portfolio-list" id="connList"></div></section></aside></div></section>
+
+  <footer class="footer"><span>CUDEX • Investment Terminal • Demo v0.3</span><span>Fiyatlar bilgilendirme amaçlıdır; işlem emri gönderilmez.</span></footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const fmt = (n, digits=2) => Number.isFinite(n) ? n.toLocaleString('tr-TR',{minimumFractionDigits:digits,maximumFractionDigits:digits}) : '—';
+  const money = (n, currency='TRY') => Number.isFinite(n) ? new Intl.NumberFormat('tr-TR',{style:'currency',currency,maximumFractionDigits:2}).format(n) : '—';
+  const state = {
+    btcUsd:null, goldUsd:null, usdTry:null, btcChange:null, updatedAt:null,
+    series:{BTCUSD:[],BTCGOLD:[],GOLD:[],BTCGRAM:[],GRAMTRY:[]}, range:'D1', hist:[], conn:{}, eurTry:null, hover:null, tryLive:0, chg:{}, flows:JSON.parse(localStorage.getItem('cudex_flows')||'[]'), wsnap:JSON.parse(localStorage.getItem('cudex_wsnap')||'[]'), posts:JSON.parse(localStorage.getItem('cudex_posts')||'[]'), chart:'BTCUSD',
+    portfolio: JSON.parse(localStorage.getItem('cudex_portfolio')||'null') || {cash:100000,btc:0,goldGrams:0,transactions:[]},
+    alerts:JSON.parse(localStorage.getItem('cudex_alerts')||'[]'),
+    triggered:new Set(),
+    wallet:JSON.parse(localStorage.getItem('cudex_wallet')||'[]'), profile:JSON.parse(localStorage.getItem('cudex_profile')||'{}')
+  };
+  function toast(msg){const el=$('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>el.style.display='none',3500)}
+  function save(){localStorage.setItem('cudex_portfolio',JSON.stringify(state.portfolio));localStorage.setItem('cudex_alerts',JSON.stringify(state.alerts));localStorage.setItem('cudex_wallet',JSON.stringify(state.wallet));localStorage.setItem('cudex_profile',JSON.stringify(state.profile));localStorage.setItem('cudex_flows',JSON.stringify(state.flows))}
+  function current(asset){
+    if(asset==='BTCUSD') return state.btcUsd;
+    if(asset==='BTCGOLD') return state.btcUsd&&state.goldUsd ? state.btcUsd/state.goldUsd:null;
+    if(asset==='GOLD') return state.goldUsd;
+    if(asset==='USDTRY') return state.usdTry;
+    if(asset==='BTCGRAM') return state.btcUsd&&state.goldUsd ? state.btcUsd/(state.goldUsd/31.1034768):null;
+    if(asset==='GRAMTRY') return current('GOLDGRAM');
+    if(asset==='BTC') return state.btcUsd&&state.usdTry ? state.btcUsd*state.usdTry:null;
+    if(asset==='GOLDGRAM') return state.goldUsd&&state.usdTry ? state.goldUsd*state.usdTry/31.1034768:null;
+    return null;
+  }
+  function addPoint(key,val){if(!Number.isFinite(val))return;const a=state.series[key];a.push({t:Date.now(),v:val});if(a.length>240)a.shift();drawChart()}
+  function renderMarket(){
+    $('btcUsd').textContent=state.btcUsd?money(state.btcUsd,'USD'):'Bağlanıyor…';
+    $('btcChange').textContent=state.btcChange!==null?`${state.btcChange>=0?'▲':'▼'} ${fmt(Math.abs(state.btcChange),2)}% · 24 saat`:'Canlı fiyat akışı';
+    $('btcChange').className='asset-change '+(state.btcChange===null?'':state.btcChange>=0?'up':'down');
+    $('btcTry').textContent=state.btcUsd&&state.usdTry?money(state.btcUsd*state.usdTry):'—';
+    $('goldUsd').textContent=state.goldUsd?money(state.goldUsd,'USD'):'—';
+    $('goldSub').textContent=state.goldUsd?'Kaynak: Gold API / son alınan değer':'Altın verisi bekleniyor';
+    $('usdTry').textContent=state.usdTry?`₺${fmt(state.usdTry,4)}`:'—';
+    $('fxSub').textContent=state.usdTry?(state.tryLive&&Date.now()-state.tryLive<30000?'Kaynak: Binance USDT/TRY · canlı':'Kaynak: döviz API (gecikmeli)'):'Döviz verisi bekleniyor';
+    if(state.btcUsd&&state.goldUsd){
+      $('btcGold').textContent=fmt(state.btcUsd/state.goldUsd,3)+' ons';
+      $('goldPerUsd').textContent=fmt(1/state.goldUsd,8)+' ons';
+    }
+    if(state.goldUsd&&state.usdTry){
+      const oz=state.goldUsd*state.usdTry;
+      $('goldTry').textContent=money(oz);
+      $('gramGold').textContent=money(oz/31.1034768);
+    }
+    if(state.btcUsd&&state.usdTry&&state.goldUsd){
+      $('btcGram').textContent=fmt((state.btcUsd*state.usdTry)/(state.goldUsd*state.usdTry/31.1034768),1)+' g';
+    }
+    $('lastUpdate').textContent=state.updatedAt?new Date(state.updatedAt).toLocaleTimeString('tr-TR'):'Bekleniyor';
+    $('connection').textContent=state.btcUsd?'BTC canlı · FX/altın periyodik':'Piyasa bağlantısı başlatılıyor';
+    $('chartSource').textContent=state.btcUsd?'BTC: Binance WebSocket · FX/altın: HTTP API':'Veri kaynaklarına bağlanılıyor';
+    updateTradeQuote();renderPortfolio();checkAlerts();renderExtra();
+  }
+  async function fetchGold(){
+    try{
+      const r=await fetch('https://api.gold-api.com/price/XAU',{cache:'no-store'});
+      if(!r.ok)throw Error('Gold API '+r.status);
+      const d=await r.json();const v=Number(d.price||d.ask||d.value);
+      if(v>0){state.goldUsd=v;state.conn.gold=Date.now();addPoint('GOLD',v);if(state.usdTry)addPoint('GRAMTRY',v*state.usdTry/31.1034768)}
+    }catch(e){console.warn('Gold API unavailable',e)}
+  }
+  async function fetchFx(){
+    try{
+      const r=await fetch('https://open.er-api.com/v6/latest/USD',{cache:'no-store'});
+      if(!r.ok)throw Error('FX '+r.status);
+      const d=await r.json();const v=Number(d.rates?.TRY);
+      if(v>0){if(!state.tryLive||Date.now()-state.tryLive>30000){state.usdTry=v;state.conn.fx=Date.now()}if(d.rates?.EUR>0)state.eurTry=state.usdTry/d.rates.EUR}
+    }catch(e){console.warn('FX API unavailable',e)}
+  }
+  let ws, reconnectTimer;
+  function connectBtc(){
+    try{
+      ws=new WebSocket('wss://stream.binance.com:9443/stream?streams=btcusdt@ticker/usdttry@ticker/paxgusdt@ticker');
+      ws.onopen=()=>{ $('connection').textContent='Bitcoin canlı bağlantısı aktif'; };
+      ws.onmessage=e=>{
+        const m=JSON.parse(e.data),d=m.data||m;if(m.stream==='paxgusdt@ticker'){state.chg.GOLD=Number(d.P);if(!state.conn.gold||Date.now()-state.conn.gold>120000){const g=Number(d.c);if(g>0){state.goldUsd=g;renderMarket()}}return}if(m.stream==='usdttry@ticker'){const t=Number(d.c);if(t>0){state.usdTry=t;state.chg.TRY=Number(d.P);state.tryLive=Date.now();state.conn.fx=Date.now();renderMarket()}return}state.btcUsd=Number(d.c);state.btcChange=Number(d.P);state.updatedAt=Date.now();state.conn.ws=Date.now();
+        addPoint('BTCUSD',state.btcUsd);if(state.goldUsd){addPoint('BTCGOLD',state.btcUsd/state.goldUsd);addPoint('BTCGRAM',state.btcUsd/(state.goldUsd/31.1034768))}
+        renderMarket();
+      };
+      ws.onerror=()=>{try{ws.close()}catch(_){}};
+      ws.onclose=()=>{ $('connection').textContent='Bağlantı yenileniyor…';clearTimeout(reconnectTimer);reconnectTimer=setTimeout(connectBtc,3000);};
+    }catch(e){console.warn(e);setTimeout(connectBtc,5000)}
+  }
+  function updateTradeQuote(){
+    const a=$('tradeAsset').value,price=a==='BTC'?current('BTC'):current('GOLDGRAM'),unit=a==='BTC'?'BTC':'gram',dg=a==='BTC'?8:4,q=$('tradeMode').value==='QTY';
+    $('tradeLabel').textContent=q?`Miktar (${unit})`:'Tutar (TL)';
+    const inp=$('tradeAmount');inp.step=q?'any':'1';inp.min=q?'0':'1';
+    if(!price){$('tradeQuote').textContent='Fiyat verisi bekleniyor';return}
+    const v=Number(inp.value),fee=Number($('feeRate').value)/100||0,buy=$('tradeSide').value==='BUY';
+    let t=`Yaklaşık fiyat: ${money(price)} / ${unit}`;
+    if(v>0)t+=q?` · ${fmt(v,dg)} ${unit} ≈ ${money(v*price*(buy?1+fee:1-fee))} (komisyon dahil)`:` · ≈ ${fmt(v*(1-fee)/price,dg)} ${unit}`;
+    $('tradeQuote').textContent=t;
+  }
+  function renderPortfolio(){
+    const p=state.portfolio, btcVal=p.btc*(current('BTC')||0), goldVal=p.goldGrams*(current('GOLDGRAM')||0), total=p.cash+btcVal+goldVal;
+    const pnl=total-100000, pct=pnl/100000*100;
+    $('portfolioValue').textContent=money(total);$('cashValue').textContent=money(p.cash);
+    $('portfolioPnl').textContent=(pnl>=0?'+':'')+money(pnl)+' toplam fark';
+    $('portfolioPnl').className=pnl>=0?'up':'down';
+    $('returnValue').textContent=(pct>=0?'+':'')+fmt(pct,2)+'%';$('returnValue').className=pct>=0?'up':'down';
+    $('holdings').innerHTML=`<div class="holding"><div><strong>Bitcoin</strong><small>${fmt(p.btc,8)} BTC</small></div><div style="text-align:right"><strong>${money(btcVal)}</strong><small>Portföy değeri</small></div></div><div class="holding"><div><strong>Altın</strong><small>${fmt(p.goldGrams,4)} gram</small></div><div style="text-align:right"><strong>${money(goldVal)}</strong><small>Portföy değeri</small></div></div>`;
+    const rows=p.transactions.slice(0,25);
+    $('historyBody').innerHTML=rows.length?rows.map(t=>`<tr><td>${new Date(t.time).toLocaleString('tr-TR')}</td><td class="${t.side==='BUY'?'up':'down'}">${t.side==='BUY'?'ALIŞ':'SATIŞ'}</td><td>${t.asset==='BTC'?'BTC':'Gram altın'}</td><td>${fmt(t.qty,t.asset==='BTC'?8:4)}</td><td>${money(t.price)}</td><td>${money(t.total)}</td></tr>`).join(''):'<tr><td colspan="6" class="empty">Henüz işlem yapılmadı.</td></tr>';
+    save();
+  }
+  function executeTrade(){
+    const asset=$('tradeAsset').value,side=$('tradeSide').value,q=$('tradeMode').value==='QTY',v=Number($('tradeAmount').value),fee=Number($('feeRate').value)/100;
+    const price=current(asset==='BTC'?'BTC':'GOLDGRAM'),p=state.portfolio,key=asset==='BTC'?'btc':'goldGrams',unit=asset==='BTC'?'BTC':'gram';
+    if(!price||!Number.isFinite(price)){toast('Önce fiyat verisinin gelmesini bekle.');return}
+    if(!(v>0)||!Number.isFinite(v)){toast(q?'Geçerli bir miktar gir.':'Geçerli bir TL tutarı gir.');return}
+    if(!(fee>=0&&fee<=0.1)){toast('Komisyon oranı 0 ile 10 arasında olmalı.');return}
+    let qty,total;
+    if(side==='BUY'){
+      if(q){qty=v;total=qty*price*(1+fee)}else{total=v;qty=v*(1-fee)/price}
+      if(total>p.cash+1e-9){toast(`Sanal TL bakiyesi yetersiz (gereken: ${money(total)}).`);return}
+      p.cash-=total;p[key]+=qty;
+    }else{
+      qty=q?v:v/price;
+      if(qty>p[key]+1e-12){toast('Satış için yeterli varlık yok.');return}
+      total=qty*price*(1-fee);p.cash+=total;p[key]=Math.max(0,p[key]-qty);
+    }
+    p.transactions.unshift({time:Date.now(),asset,side,qty,price,total});walletSync(asset,side,qty,price,total);
+    save();renderPortfolio();updateTradeQuote();
+    toast(`${side==='BUY'?'Alış':'Satış'}: ${fmt(qty,asset==='BTC'?8:4)} ${unit} · ${money(total)}`);
+  }
+    function drawChart(cv,dat,ev){
+    const canvas=cv||$('priceChart'),ctx=canvas.getContext('2d'),rect=canvas.getBoundingClientRect(),dpr=window.devicePixelRatio||1;
+    canvas.width=Math.max(1,Math.floor(rect.width*dpr));canvas.height=Math.max(1,Math.floor(rect.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);
+    const w=rect.width,h=rect.height;ctx.clearRect(0,0,w,h);
+    const rg=dat?'W1':state.range,L=document.documentElement.dataset.theme==='light',C={grid:L?'#e1e8f0':'#1f2c3c',m:L?'#5d6b7c':'#91a0b5',tipbg:L?'#fff':'#17283a',tipbd:L?'#c5d1df':'#36516d',tx:L?'#13212f':'#eef4fb',cross:L?'#8a9bb0':'#5c7089'};
+    const data=dat||(rg==='LIVE'?(state.series[state.chart]||[]):(state.hist||[]));
+    canvas._g=null;
+    if(data.length<2){ctx.fillStyle=C.m;ctx.font='13px system-ui';ctx.fillText((dat||rg==='LIVE')?'Veri birikiyor…':'Veri yükleniyor…',16,h/2);return}
+    const vals=data.map(x=>x.v),min=Math.min(...vals),max=Math.max(...vals),r0=max-min||Math.abs(max)*0.001||1,ymin=min-r0*.06,ymax=max+r0*.06,yr=ymax-ymin;
+    const dg=v=>{const a=Math.abs(v);return fmt(v,a>=10000?0:a>=100?2:a>=1?3:5)};
+    ctx.font='11px system-ui';
+    const labels=[0,1,2,3,4].map(i=>dg(ymax-i*yr/4)),padL=Math.max(...labels.map(t=>ctx.measureText(t).width))+14;
+    const pad={l:padL,r:12,t:12,b:24},cw=w-pad.l-pad.r,ch=h-pad.t-pad.b,n=data.length;
+    const X=i=>pad.l+i*cw/(n-1),Y=v=>pad.t+(ymax-v)/yr*ch;
+    const intra=['LIVE','M1','H1','D1','W1'].includes(rg);
+    const short=t=>new Date(t).toLocaleString('tr-TR',['LIVE','M1','H1','D1'].includes(rg)?{hour:'2-digit',minute:'2-digit'}:{day:'2-digit',month:'short',year:['M6','Y1'].includes(rg)?'2-digit':undefined});
+    const long=t=>new Date(t).toLocaleString('tr-TR',intra?{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit',second:rg==='LIVE'?'2-digit':undefined}:{day:'2-digit',month:'long',year:'numeric'});
+    ctx.lineWidth=1;
+    for(let i=0;i<5;i++){const y=pad.t+i*ch/4;ctx.strokeStyle=C.grid;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(w-pad.r,y);ctx.stroke();ctx.fillStyle=C.m;ctx.textAlign='right';ctx.fillText(labels[i],pad.l-8,y+4)}
+    ctx.textAlign='center';
+    [0,1/3,2/3,1].forEach((f,k)=>{const i=Math.round(f*(n-1));ctx.fillStyle=C.m;ctx.textAlign=k===0?'left':k===3?'right':'center';ctx.fillText(short(data[i].t),k===0?pad.l:k===3?w-pad.r:X(i),h-6)});
+    const up=vals[n-1]>=vals[0],col=up?'56,217,150':'255,107,120';
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);grad.addColorStop(0,`rgba(${col},.22)`);grad.addColorStop(1,`rgba(${col},0)`);
+    ctx.beginPath();vals.forEach((v,i)=>i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v)));ctx.lineTo(X(n-1),pad.t+ch);ctx.lineTo(X(0),pad.t+ch);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+    ctx.beginPath();vals.forEach((v,i)=>i?ctx.lineTo(X(i),Y(v)):ctx.moveTo(X(i),Y(v)));ctx.strokeStyle=`rgb(${col})`;ctx.lineWidth=2;ctx.stroke();
+    (ev||[]).forEach(e=>{if(e.t<data[0].t)return;const i=data.findIndex(d=>d.t>=e.t);if(i<0)return;const x=X(i),y=pad.t+ch-9,u=e.type==='IN';ctx.fillStyle=u?'#38d996':'#ff6b78';ctx.beginPath();if(u){ctx.moveTo(x,y-7);ctx.lineTo(x-5,y+3);ctx.lineTo(x+5,y+3)}else{ctx.moveTo(x,y+3);ctx.lineTo(x-5,y-7);ctx.lineTo(x+5,y-7)}ctx.fill()});
+    // son fiyat etiketi
+    const ly=Y(vals[n-1]);ctx.setLineDash([3,4]);ctx.strokeStyle=`rgba(${col},.5)`;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,ly);ctx.lineTo(w-pad.r,ly);ctx.stroke();ctx.setLineDash([]);
+    const lt=dg(vals[n-1]),lw=ctx.measureText(lt).width+10;ctx.fillStyle=`rgb(${col})`;ctx.fillRect(pad.l-lw-2,ly-9,lw,18);ctx.fillStyle='#06150f';ctx.textAlign='right';ctx.fillText(lt,pad.l-7,ly+4);
+    canvas._g={pad,n,cw};
+    const hi=canvas._h;
+    if(hi!=null&&hi>=0&&hi<n){
+      const px=X(hi),py=Y(vals[hi]);
+      ctx.strokeStyle=C.cross;ctx.setLineDash([4,4]);ctx.beginPath();ctx.moveTo(px,pad.t);ctx.lineTo(px,pad.t+ch);ctx.moveTo(pad.l,py);ctx.lineTo(w-pad.r,py);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(px,py,4,0,7);ctx.fill();ctx.strokeStyle=`rgb(${col})`;ctx.lineWidth=2;ctx.stroke();
+      const t1=dg(vals[hi]),t2=long(data[hi].t),bw=Math.max(ctx.measureText(t1).width,ctx.measureText(t2).width)+18,bh=40;
+      let bx=px+14;if(bx+bw>w-4)bx=px-14-bw;let by=Math.min(Math.max(py-bh/2,pad.t),pad.t+ch-bh);
+      ctx.fillStyle=C.tipbg;ctx.strokeStyle=C.tipbd;ctx.lineWidth=1;ctx.beginPath();ctx.roundRect?ctx.roundRect(bx,by,bw,bh,8):ctx.rect(bx,by,bw,bh);ctx.fill();ctx.stroke();
+      ctx.textAlign='left';ctx.fillStyle=C.tx;ctx.font='700 13px system-ui';ctx.fillText(t1,bx+9,by+17);ctx.fillStyle=C.m;ctx.font='11px system-ui';ctx.fillText(t2,bx+9,by+32);
+      // eksende imleç fiyatı
+      const ax=dg(vals[hi]),aw=ctx.measureText(ax).width+10;ctx.fillStyle='#2b3f56';ctx.fillRect(pad.l-aw-2,py-9,aw,18);ctx.fillStyle='#fff';ctx.textAlign='right';ctx.fillText(ax,pad.l-7,py+4);
+    }
+  }
+  function renderAlerts(){
+    $('alertList').innerHTML=state.alerts.map((a,i)=>`<div class="holding"><div><strong>${a.asset}</strong><small>${a.direction==='above'?'Üzerine çıkarsa':'Altına düşerse'} ${fmt(a.value,a.asset==='BTCGOLD'?3:2)}</small></div><button class="secondary" data-remove-alert="${i}">Sil</button></div>`).join('')||'<div class="muted" style="font-size:12px">Henüz alarm yok.</div>';
+  }
+  function checkAlerts(){
+    state.alerts.forEach((a,i)=>{const v=current(a.asset);if(v===null||state.triggered.has(i))return;const hit=a.direction==='above'?v>=a.value:v<=a.value;if(hit){state.triggered.add(i);toast(`Fiyat alarmı: ${a.asset} hedef seviyeye ulaştı.`);if('Notification'in window&&Notification.permission==='granted')new Notification('CUDEX fiyat alarmı',{body:`${a.asset} hedef seviyeye ulaştı.`})}});
+  }
+  $('executeTrade').addEventListener('click',executeTrade);
+  $('tradeAsset').addEventListener('change',updateTradeQuote);
+  $('tradeSide').addEventListener('change',()=>{ $('executeTrade').textContent=$('tradeSide').value==='BUY'?'Sanal alış gerçekleştir':'Sanal satış gerçekleştir';});
+  $('refreshBtn').addEventListener('click',async()=>{await Promise.all([fetchGold(),fetchFx()]);renderMarket();toast('Piyasa verileri yenilendi.');});
+  $('resetPortfolio').addEventListener('click',()=>{if(confirm('Sanal portföyü 100.000 TL başlangıç bakiyesine sıfırlayalım mı?')){state.portfolio={cash:100000,btc:0,goldGrams:0,transactions:[]};save();renderPortfolio();toast('Portföy sıfırlandı.')}});
+  $('clearHistory').addEventListener('click',()=>{if(confirm('İşlem geçmişi silinsin mi?')){state.portfolio.transactions=[];save();renderPortfolio()}});
+  document.querySelectorAll('[data-chart]').forEach(b=>b.addEventListener('click',()=>selectChart(b.dataset.chart)));
+  $('addAlert').addEventListener('click',()=>{const asset=$('alertAsset').value,direction=$('alertDirection').value,value=Number($('alertValue').value);if(!(value>0)){toast('Geçerli bir hedef değer gir.');return}state.alerts.push({asset,direction,value});save();renderAlerts();$('alertValue').value='';toast('Fiyat alarmı eklendi.');if('Notification'in window&&Notification.permission==='default')Notification.requestPermission()});
+  $('alertList').addEventListener('click',e=>{const b=e.target.closest('[data-remove-alert]');if(b){state.alerts.splice(Number(b.dataset.removeAlert),1);state.triggered.clear();save();renderAlerts()}});
+
+  // ===== v0.2: yeni pariteler, zaman aralıkları, cüzdan, profil =====
+  const G=31.1034768, esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const TT={BTCUSD:['Bitcoin / USD','Canlı piyasa takibi'],BTCGRAM:['Bitcoin / Gram Altın','1 BTC karşılığı gram altın'],BTCGOLD:['Bitcoin / Ons Altın','1 BTC karşılığı ons altın'],GOLD:['Ons Altın / USD','Ons altın fiyat geçmişi'],GRAMTRY:['Gram Altın / TRY','Teorik 24 ayar gram altın']};
+  const RG={M1:['1m',120,'Son 2 saat · 1 dk mum'],H1:['5m',144,'Son 12 saat · 5 dk mum'],D1:['15m',96,'Son 1 gün · 15 dk mum'],W1:['1h',168,'Son 1 hafta · 1 saat mum'],M:['4h',180,'Son 1 ay · 4 saat mum'],M3:['1d',90,'Son 3 ay · günlük mum'],M6:['1d',180,'Son 6 ay · günlük mum'],Y1:['1d',365,'Son 1 yıl · günlük mum']};
+  function selectChart(key){
+    state.chart=key;
+    document.querySelectorAll('[data-chart]').forEach(b=>b.classList.toggle('active',b.dataset.chart===key));
+    $('chartTitle').textContent=TT[key][0];$('chartSubtitle').textContent=TT[key][1];loadHist();
+  }
+  async function kl(sym,iv,n){
+    for(const h of ['https://api.binance.com','https://data-api.binance.vision']){
+      try{const r=await fetch(`${h}/api/v3/klines?symbol=${sym}&interval=${iv}&limit=${n}`);if(r.ok)return (await r.json()).map(k=>[k[0],+k[4]])}catch(e){}
+    }
+    return null;
+  }
+  async function loadHist(){
+    if(state.range==='LIVE'){$('rangeNote').textContent='Bu oturumda biriken canlı veri';drawChart();return}
+    const [iv,n,txt]=RG[state.range],key=state.chart,tok=++loadHist.t;
+    const need={BTCUSD:['BTCUSDT'],BTCGOLD:['BTCUSDT','PAXGUSDT'],BTCGRAM:['BTCUSDT','PAXGUSDT'],GOLD:['PAXGUSDT'],GRAMTRY:['PAXGUSDT','USDTTRY']}[key];
+    $('rangeNote').textContent='Geçmiş veri yükleniyor…';
+    const res=await Promise.all(need.map(x=>kl(x,iv,n)));
+    if(tok!==loadHist.t)return;
+    if(res.some(x=>!x)){state.conn.hist=0;state.hist=[];$('rangeNote').textContent='Geçmiş veri alınamadı (Binance erişimi kontrol et)';drawChart();return}
+    state.conn.hist=Date.now();
+    const maps=res.slice(1).map(a=>new Map(a));
+    state.hist=res[0].filter(([t])=>maps.every(m=>m.has(t))).map(([t,a])=>{
+      const b=maps[0]?.get(t);
+      return {t,v:key==='BTCGOLD'?a/b:key==='BTCGRAM'?a/(b/G):key==='GRAMTRY'?a*b/G:a};
+    });
+    $('rangeNote').textContent=txt+(key==='BTCUSD'?'':' · altın geçmişi: PAXG/Binance');
+    drawChart();
+  }
+  loadHist.t=0;
+  document.querySelectorAll('[data-range]').forEach(b=>b.addEventListener('click',()=>{state.range=b.dataset.range;document.querySelectorAll('[data-range]').forEach(x=>x.classList.toggle('active',x===b));loadHist()}));
+
+  // Cüzdan
+  const WA={BTC:['Bitcoin','BTC',()=>current('BTC'),8],GRAM:['Gram altın','g',()=>current('GOLDGRAM'),3],CEYREK:['Çeyrek altın','adet',()=>{const g=current('GOLDGRAM');return g&&g*1.6035},2],USD:['Dolar','$',()=>state.usdTry,2],EUR:['Euro','€',()=>state.eurTry,2],TRY:['Türk Lirası (nakit)','₺',()=>1,2],CUSTOM:['Özel','adet',null,2]};
+  function renderWallet(){
+    let tv=0,kv=0,kc=0;
+    $('walletBody').innerHTML=state.wallet.map(w=>{
+      const A=WA[w.type],p=w.type==='CUSTOM'?w.price:A[2](),val=p?w.qty*p:null,cost=w.cost>0?w.qty*w.cost:null,pnl=val!==null&&cost!==null?val-cost:null;
+      if(val)tv+=val;if(pnl!==null){kv+=val;kc+=cost}
+      return `<tr><td>${esc(w.type==='CUSTOM'?w.name:A[0])}${w.src==='trade'?' <small class="muted">· sanal işlem</small>':''}</td><td>${fmt(w.qty,A[3])} ${A[1]}</td><td>${w.cost>0?money(w.cost):'—'}</td><td>${p?money(p):'—'}</td><td>${val!==null?money(val):'—'}</td><td class="${pnl===null?'':pnl>=0?'up':'down'}">${pnl===null?'—':(pnl>=0?'+':'')+money(pnl)+' (%'+fmt(pnl/cost*100,1)+')'}</td><td style="white-space:nowrap"><button class="secondary" data-wout="${w.id}">Çıkış</button> <button class="secondary" data-wdel="${w.id}">Sil</button></td></tr>`;
+    }).join('')||'<tr><td colspan="7" class="empty">Cüzdan boş. Sağdaki formdan varlık ekle.</td></tr>';
+    const k=kv-kc;$('wTotal').textContent=money(tv);
+    $('wPnl').textContent=kc?`Alış fiyatı girilenlerde ${k>=0?'+':''}${money(k)} (%${fmt(k/kc*100,2)})`:'Alış fiyatı girdiğin varlıklarda kâr/zarar görünür';
+    $('wPnl').className=kc?(k>=0?'up':'down'):'muted';
+    let fi=0,fo=0;state.flows.forEach(f=>f.type==='IN'?fi+=f.amount:fo+=f.amount);
+    $('flowSum').textContent=`Toplam giriş ${money(fi)} · Toplam çıkış ${money(fo)} · Net ${money(fi-fo)}`;
+    $('flowBody').innerHTML=state.flows.slice(0,30).map(f=>`<tr><td>${new Date(f.t).toLocaleString('tr-TR')}</td><td class="${f.type==='IN'?'up':'down'}">${f.type==='IN'?'▲ Giriş':'▼ Çıkış'}</td><td>${esc(f.label)}</td><td>${money(f.amount)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Henüz hareket yok.</td></tr>';
+    drawWallet();
+  }
+  function renderExtra(){
+    const b=current('BTCGRAM'),g=current('GOLDGRAM');
+    $('btcGramCard').textContent=b?fmt(b,2)+' g':'—';$('gramTryCard').textContent=g?money(g):'—';
+    const c=state.chg,bc=state.btcChange,nul=(x,y)=>x==null||y==null,pc=(x,y)=>nul(x,y)?NaN:((1+x/100)*(1+y/100)-1)*100,dv=(x,y)=>nul(x,y)?NaN:((1+x/100)/(1+y/100)-1)*100;
+    const setC=(id,v)=>{if(!Number.isFinite(v))return;const e=$(id);e.textContent=`${v>=0?'▲':'▼'} ${fmt(Math.abs(v),2)}% · 24 saat`;e.className='asset-change '+(v>=0?'up':'down')};
+    setC('btcTrySub',pc(bc,c.TRY));setC('goldSub',c.GOLD==null?NaN:c.GOLD);setC('fxSub',c.TRY==null?NaN:c.TRY);setC('btcGramSub',dv(bc,c.GOLD));setC('gramTrySub',pc(c.GOLD,c.TRY));
+    snap();if(!$('v-wallet').hidden)renderWallet();
+  }
+  $('wType').addEventListener('change',()=>{$('custF').hidden=$('wType').value!=='CUSTOM'});
+  $('wAdd').addEventListener('click',()=>{
+    const type=$('wType').value,qty=+$('wQty').value,cost=+$('wCost').value||0,price=+$('wPrice').value||0,name=$('wName').value.trim();
+    if(!(qty>0))return toast('Geçerli bir miktar gir.');
+    if(type==='CUSTOM'&&(!name||!(price>0)))return toast('Özel varlık için ad ve güncel fiyat gir.');
+    state.wallet.push({id:Date.now(),type,qty,cost,name,price});{const A=WA[type];addFlow('IN',(type==='CUSTOM'?name:A[0])+' · '+fmt(qty,4)+' eklendi',qty*(cost>0?cost:(type==='CUSTOM'?price:(A[2]()||0))))}save();renderWallet();
+    $('wQty').value='';$('wCost').value='';toast('Cüzdana eklendi.');
+  });
+  $('walletBody').addEventListener('click',e=>{
+    const d=e.target.closest('[data-wdel]'),o=e.target.closest('[data-wout]'),x=d||o;if(!x)return;
+    const w=state.wallet.find(v=>String(v.id)===(x.dataset.wdel||x.dataset.wout));if(!w)return;
+    const p=w.type==='CUSTOM'?w.price:WA[w.type][2](),nm=w.type==='CUSTOM'?w.name:WA[w.type][0];let q=w.qty;
+    if(o){q=Number((prompt(`${nm} için çıkış miktarı (en fazla ${w.qty}):`,w.qty)||'').replace(',','.'));if(!(q>0))return;q=Math.min(q,w.qty)}
+    w.qty-=q;if(w.qty<=1e-12)state.wallet=state.wallet.filter(v=>v!==w);
+    addFlow('OUT',`${nm} · ${fmt(q,4)} ${o?'çıkış':'kaldırıldı'}`,q*(p||w.cost||0));save();renderWallet();
+  });
+
+  // Profil & bağlantılar
+  function setAv(el,p){el.style.borderRadius='50%';el.style.backgroundSize='cover';el.style.backgroundPosition='center';el.style.backgroundImage=p.photo?`url(${p.photo})`:'none';el.textContent=p.photo?'':(p.name||'C')[0].toUpperCase()}
+  function loadProfile(){const p=state.profile;$('pName').value=p.name||'';$('pMail').value=p.mail||'';$('pNote').value=p.note||'';setAv($('avatar'),p);setAv($('topAvatar'),p)}
+  $('pSave').addEventListener('click',()=>{state.profile={...state.profile,name:$('pName').value.trim(),mail:$('pMail').value.trim(),note:$('pNote').value.trim()};save();loadProfile();toast('Profil kaydedildi.')});
+  function renderConn(){
+    const c=state.conn,now=Date.now(),age=t=>t?`Son veri ${Math.round((now-t)/1000)} sn önce`:'Henüz veri yok';
+    const row=(n,t,ok)=>`<div class="holding"><div><strong>${n}</strong><small>${age(t)}</small></div><span class="${ok?'up':'down'}">● ${ok?'Bağlı':'Yok'}</span></div>`;
+    $('connList').innerHTML=row('Binance WebSocket · BTC canlı',c.ws,c.ws&&now-c.ws<30000)+row('Gold API · ons altın',c.gold,c.gold&&now-c.gold<180000)+row('Döviz API · USD/TRY, EUR',c.fx,c.fx&&now-c.fx<180000)+row('Binance geçmiş veri · grafik',c.hist,!!c.hist);
+  }
+  $('expBtn').addEventListener('click',()=>{
+    const b=new Blob([JSON.stringify({portfolio:state.portfolio,alerts:state.alerts,wallet:state.wallet,profile:state.profile,flows:state.flows,wsnap:state.wsnap,posts:state.posts},null,1)],{type:'application/json'});
+    const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cudex-yedek.json';a.click();
+  });
+  $('impFile').addEventListener('change',async e=>{
+    try{const d=JSON.parse(await e.target.files[0].text());if(d.portfolio)state.portfolio=d.portfolio;state.alerts=d.alerts||[];state.wallet=d.wallet||[];state.profile=d.profile||{};state.flows=d.flows||[];localStorage.setItem('cudex_wsnap',JSON.stringify(d.wsnap||[]));localStorage.setItem('cudex_posts',JSON.stringify(d.posts||[]));save();location.reload()}
+    catch(_){toast('Yedek dosyası okunamadı.')}
+  });
+
+  // Sekmeler
+  function showTab(t){
+    ['market','wallet','profile','news','info'].forEach(k=>{$('v-'+k).hidden=k!==t});
+    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+    if(t==='market')drawChart();if(t==='wallet')renderWallet();if(t==='profile'){renderConn();loadProfile()}
+  }
+  document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+  setInterval(()=>{if(!$('v-profile').hidden)renderConn()},3000);
+  setInterval(()=>{if(state.range!=='LIVE'&&!$('v-market').hidden)loadHist()},60000);
+  loadHist();loadProfile();
+  $('tradeMode').addEventListener('change',()=>{const q=$('tradeMode').value==='QTY';$('tradeAmount').value=q?($('tradeAsset').value==='BTC'?'0.005':'0.1'):'1000';updateTradeQuote()});
+  ['tradeAmount','feeRate'].forEach(i=>$(i).addEventListener('input',updateTradeQuote));$('tradeSide').addEventListener('change',updateTradeQuote);
+
+  // ===== v0.3 =====
+  function drawWallet(){if($('v-wallet').hidden)return;drawChart($('walletChart'),state.wsnap,state.flows)}
+  function bindHover(c,redraw){const at=e=>{const g=c._g;if(!g)return;c._h=Math.min(g.n-1,Math.max(0,Math.round((e.clientX-c.getBoundingClientRect().left-g.pad.l)/g.cw*(g.n-1))));redraw()};c.addEventListener('pointermove',at);c.addEventListener('pointerdown',at);c.addEventListener('pointerleave',()=>{c._h=null;redraw()})}
+  bindHover($('priceChart'),()=>drawChart());bindHover($('walletChart'),drawWallet);
+  function wTotal(){let tv=0,ok=true;state.wallet.forEach(w=>{const p=w.type==='CUSTOM'?w.price:WA[w.type][2]();if(p)tv+=w.qty*p;else ok=false});return{tv,ok}}
+  function snap(force){const{tv,ok}=wTotal(),l=state.wsnap[state.wsnap.length-1];if(!ok||(!force&&!(tv>0)))return;if(!force&&l&&Date.now()-l.t<20000)return;state.wsnap.push({t:Date.now(),v:tv});if(state.wsnap.length>1500)state.wsnap.shift();try{localStorage.setItem('cudex_wsnap',JSON.stringify(state.wsnap))}catch(e){}}
+  function addFlow(type,label,amount){if(!(amount>0))return;state.flows.unshift({t:Date.now(),type,label,amount});state.flows.length=Math.min(state.flows.length,300);save();snap(true)}
+  function walletSync(asset,side,qty,price,total){
+    const type=asset==='BTC'?'BTC':'GRAM',nm=asset==='BTC'?'Bitcoin':'Gram altın';
+    if(side==='BUY'){state.wallet.push({id:Date.now(),type,qty,cost:price,name:'',price:0,src:'trade'});addFlow('IN',`Sanal alış · ${nm} ${fmt(qty,asset==='BTC'?8:4)}`,qty*price)}
+    else{let r=qty;for(const w of state.wallet.filter(v=>v.type===type)){const d=Math.min(w.qty,r);w.qty-=d;r-=d;if(r<=1e-12)break}state.wallet=state.wallet.filter(w=>w.qty>1e-12);addFlow('OUT',`Sanal satış · ${nm} ${fmt(qty,asset==='BTC'?8:4)}`,total)}
+    save();if(!$('v-wallet').hidden)renderWallet();
+  }
+
+  // Görsel yardımcıları
+  function imgData(file,max,sq){return new Promise((ok,no)=>{const im=new Image,u=URL.createObjectURL(file);im.onload=()=>{let sw=im.width,sh=im.height,sx=0,sy=0;if(sq){const m=Math.min(sw,sh);sx=(sw-m)/2;sy=(sh-m)/2;sw=sh=m}const sc=Math.min(1,max/sw),c=document.createElement('canvas');c.width=Math.round(sw*sc);c.height=Math.round(sh*sc);c.getContext('2d').drawImage(im,sx,sy,sw,sh,0,0,c.width,c.height);URL.revokeObjectURL(u);ok(c.toDataURL('image/jpeg',.82))};im.onerror=no;im.src=u})}
+  $('pPhoto').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{state.profile.photo=await imgData(f,200,true);save();loadProfile();toast('Fotoğraf güncellendi.')}catch(_){toast('Görsel okunamadı.')}});
+  $('pPhotoDel').addEventListener('click',()=>{delete state.profile.photo;save();loadProfile()});
+  $('topAvatar').addEventListener('click',()=>showTab('profile'));
+
+  // Tema
+  function setTheme(t){document.documentElement.dataset.theme=t;localStorage.setItem('cudex_theme',t);$('themeBtn').textContent=t==='light'?'🌙 Gece':'☀ Gündüz';document.querySelector('meta[name=theme-color]').content=t==='light'?'#f2f5f9':'#0a0f18';drawChart();drawWallet()}
+  $('themeBtn').addEventListener('click',()=>setTheme(document.documentElement.dataset.theme==='light'?'dark':'light'));
+  setTheme(document.documentElement.dataset.theme||'dark');
+
+  // Haber Akışı + Bilgilendirme
+  const pend={news:'',info:''};
+  const KD={news:['Haber Akışı','Günlük finansal ve küresel haberleri ekle','Haber','Haber başlığı','Kaynak (örn. Bloomberg HT)','Haber özeti'],info:['Bilgilendirme','Kendi makale ve notlarını yaz','Makale','Makale başlığı','Kategori (örn. Strateji)','Makale metni']};
+  Object.entries(KD).forEach(([k,d])=>{
+    const sec=document.createElement('section');sec.id='v-'+k;sec.hidden=true;
+    sec.innerHTML=`<div class="layout"><main><div class="section-head"><div><h2>${d[0]}</h2><p>${d[1]}</p></div></div><div class="feed" id="feed-${k}"></div></main><aside class="side-stack"><section class="card wide"><div class="section-head"><div><h2>Yeni ${d[2]}</h2></div></div>
+      <div class="field"><label>Bağlantı (haber sitesinden link yapıştır)</label><div style="display:flex;gap:8px"><input id="f-link-${k}" placeholder="https://..." /><button class="secondary" data-fetch="${k}">Linkten getir</button></div></div>
+      <div class="field"><label>Başlık</label><input id="f-title-${k}" placeholder="${d[3]}" /></div><div class="field"><label>${d[4]}</label><input id="f-src-${k}" /></div>
+      <div class="field"><label>Metin</label><textarea id="f-text-${k}" rows="${k==='info'?8:4}" placeholder="${d[5]}"></textarea></div>
+      <div class="field"><label>Görsel</label><div style="display:flex;gap:8px"><label class="secondary" style="cursor:pointer">Görsel yükle<input type="file" accept="image/*" hidden data-img="${k}"></label><button class="secondary" data-imgdel="${k}">Kaldır</button></div><img id="pv-${k}" class="pv" hidden></div>
+      <button class="primary" data-add="${k}">Ekle</button></section></aside></div>`;
+    document.querySelector('.footer').before(sec);renderFeed(k);
+  });
+  function okUrl(u){return /^(https?:\/\/|data:image\/)/.test(u||'')}
+  function renderFeed(k){
+    const L=state.posts.filter(p=>p.kind===k);
+    $('feed-'+k).innerHTML=L.map(p=>`<article class="card post">${okUrl(p.img)?`<img src="${esc(p.img)}" alt="" loading="lazy">`:''}<div class="pb"><h3>${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">${esc(p.title)}</a>`:esc(p.title)}</h3><small class="muted">${esc(p.src||'')}${p.src?' · ':''}${new Date(p.t).toLocaleDateString('tr-TR')}</small>${p.text?`<p class="${k==='news'?'clamp':''}">${esc(p.text)}</p>`:''}<div style="display:flex;gap:8px;justify-content:space-between;align-items:center">${p.link?`<a href="${esc(p.link)}" target="_blank" rel="noopener noreferrer">Habere git ↗</a>`:'<span></span>'}<button class="secondary" data-delpost="${p.id}">Sil</button></div></div></article>`).join('')||'<div class="card empty">Henüz içerik yok. Sağdaki formdan ekleyebilirsin.</div>';
+  }
+  function savePosts(){try{localStorage.setItem('cudex_posts',JSON.stringify(state.posts));return true}catch(e){toast('Depolama dolu; eski içerikleri sil ya da görseli küçült.');return false}}
+  function setPv(k,u){pend[k]=u||'';const e=$('pv-'+k);e.hidden=!u;if(u)e.src=u}
+  async function fetchLink(k){
+    const u=$('f-link-'+k).value.trim();if(!/^https?:\/\//.test(u))return toast('Geçerli bir http(s) bağlantısı gir.');
+    toast('Bağlantı bilgileri alınıyor…');
+    try{const r=await fetch('https://api.microlink.io/?url='+encodeURIComponent(u)),j=await r.json();if(j.status!=='success')throw 0;const d=j.data;
+      $('f-title-'+k).value=d.title||'';$('f-src-'+k).value=d.publisher||new URL(u).hostname;$('f-text-'+k).value=d.description||'';setPv(k,d.image&&d.image.url);toast('Bilgiler dolduruldu; kontrol edip ekle.')}
+    catch(e){$('f-src-'+k).value=new URL(u).hostname;toast('Otomatik bilgi alınamadı; başlık ve metni elle girebilirsin.')}
+  }
+  function addPost(k){
+    const title=$('f-title-'+k).value.trim(),link=$('f-link-'+k).value.trim();
+    if(!title)return toast('Başlık gir.');if(link&&!/^https?:\/\//.test(link))return toast('Bağlantı http(s) ile başlamalı.');
+    state.posts.unshift({id:Date.now(),kind:k,title,link,src:$('f-src-'+k).value.trim(),text:$('f-text-'+k).value.trim(),img:pend[k],t:Date.now()});
+    if(!savePosts()){state.posts.shift();return}
+    ['link','title','src','text'].forEach(x=>$(`f-${x}-${k}`).value='');setPv(k,'');renderFeed(k);toast('Eklendi.');
+  }
+  document.addEventListener('click',e=>{
+    const t=e.target,g=a=>t.closest(`[data-${a}]`);
+    if(g('fetch'))fetchLink(g('fetch').dataset.fetch);else if(g('add'))addPost(g('add').dataset.add);else if(g('imgdel'))setPv(g('imgdel').dataset.imgdel,'');
+    else if(g('delpost')){const id=g('delpost').dataset.delpost,p=state.posts.find(x=>String(x.id)===id);if(p&&confirm('Bu içerik silinsin mi?')){state.posts=state.posts.filter(x=>x!==p);savePosts();renderFeed(p.kind)}}
+    else if(t.closest('p.clamp'))t.closest('p.clamp').classList.toggle('open');
+  });
+  document.addEventListener('change',async e=>{const k=e.target.dataset&&e.target.dataset.img;if(!k||!e.target.files[0])return;try{setPv(k,await imgData(e.target.files[0],720,false))}catch(_){toast('Görsel okunamadı.')}});
+  window.addEventListener('resize',()=>{drawChart();drawWallet()});
+  setInterval(()=>{$('clock').textContent=new Date().toLocaleTimeString('tr-TR')},1000);
+  setInterval(async()=>{await Promise.all([fetchGold(),fetchFx()]);renderMarket()},20000);
+  connectBtc();fetchGold().then(renderMarket);fetchFx().then(renderMarket);renderAlerts();renderPortfolio();drawChart();
+})();
+</script>
+</body>
+</html>
